@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SCRAPZ TATZ | Custom Tattoo Studio</title>
+    <meta
+      name="description"
+      content="SCRAPZ TATZ creates bold custom tattoos with dark modern style, clean execution, and a trusted studio experience."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Edit website text, links, and portfolio items in content.js -->
+    <div class="page-shell">
+      <header class="site-header" id="top">
+        <nav class="navbar">
+          <a class="brand" href="#top" aria-label="SCRAPZ TATZ home">
+            <img
+              id="brand-logo"
+              class="brand-logo"
+              src="assets/scrapz-tatz-logo.png"
+              alt="SCRAPZ TATZ logo"
+            />
+          </a>
+
+          <button
+            class="nav-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="nav-menu"
+            aria-label="Open navigation"
+          >
+            <span></span>
+            <span></span>
+          </button>
+
+          <div class="nav-menu" id="nav-menu">
+            <div id="nav-links"></div>
+            <a class="nav-cta" id="nav-cta" href="#booking">Start Request</a>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero section section-hero">
+          <div class="hero-copy">
+            <div class="hero-kicker">
+              <p class="eyebrow" id="hero-eyebrow">Custom Tattoo Studio</p>
+              <span class="hero-tag" id="hero-tag">Dark Modern Ink Culture</span>
+            </div>
+            <h1 id="hero-title"></h1>
+            <p class="hero-text" id="hero-text"></p>
+            <div class="hero-meta" id="hero-stats"></div>
+            <ul class="hero-points" id="hero-points" aria-label="Studio highlights"></ul>
+            <a class="scroll-cue" id="hero-scroll-cue" href="#about"></a>
+          </div>
+
+          <div class="hero-visual" aria-hidden="true">
+            <div class="hero-panel">
+              <div class="signal-grid"></div>
+              <div class="hero-panel-glow"></div>
+              <div class="hero-logo-frame">
+                <img
+                  id="hero-logo"
+                  class="hero-logo"
+                  src="assets/scrapz-tatz-logo.png"
+                  alt="SCRAPZ TATZ logo artwork"
+                />
+              </div>
+              <div class="signal-card signal-card-top">
+                <span id="hero-panel-top-label"></span>
+                <strong id="hero-panel-top-value"></strong>
+              </div>
+              <div class="signal-orb signal-orb-blue"></div>
+              <div class="signal-orb signal-orb-purple"></div>
+              <div class="signal-streak signal-streak-one"></div>
+              <div class="signal-streak signal-streak-two"></div>
+              <div class="crest crest-one"></div>
+              <div class="crest crest-two"></div>
+              <div class="signal-card signal-card-bottom">
+                <span id="hero-panel-bottom-label"></span>
+                <strong id="hero-panel-bottom-value"></strong>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="about section section-tint" id="about">
+          <div class="section-heading">
+            <p class="eyebrow" id="about-eyebrow"></p>
+            <h2 id="about-title"></h2>
+            <p class="section-intro" id="about-intro"></p>
+          </div>
+          <div class="about-grid">
+            <article class="about-photo-card">
+              <img
+                class="about-photo"
+                src="assets/about/artist.JPG"
+                alt="SCRAPZ TATZ tattoo artist working during a session"
+              />
+            </article>
+            <div id="about-cards"></div>
+            <article class="about-metrics" id="about-metrics"></article>
+          </div>
+        </section>
+
+        <section class="services section section-divider-top" id="services">
+          <div class="section-heading">
+            <p class="eyebrow" id="services-eyebrow"></p>
+            <h2 id="services-title"></h2>
+            <p class="section-intro" id="services-intro"></p>
+          </div>
+          <div class="service-grid" id="services-grid"></div>
+        </section>
+
+        <section class="portfolio section section-tint" id="portfolio">
+          <div class="section-heading">
+            <p class="eyebrow" id="portfolio-eyebrow"></p>
+            <h2 id="portfolio-title"></h2>
+            <p class="section-intro" id="portfolio-intro"></p>
+          </div>
+          <div class="portfolio-shell">
+            <div class="portfolio-lead">
+              <p id="portfolio-lead"></p>
+            </div>
+            <div class="gallery-grid" id="portfolio-grid"></div>
+          </div>
+        </section>
+
+        <section class="why-us section section-divider-top" id="why-us">
+          <div class="section-heading">
+            <p class="eyebrow" id="why-us-eyebrow"></p>
+            <h2 id="why-us-title"></h2>
+            <p class="section-intro" id="why-us-intro"></p>
+          </div>
+          <div class="reasons-grid" id="why-us-grid"></div>
+        </section>
+
+        <section class="booking section section-tint" id="booking">
+          <div class="booking-panel">
+            <div class="booking-copy">
+              <p class="eyebrow" id="booking-eyebrow"></p>
+              <h2 id="booking-title"></h2>
+              <p id="booking-intro"></p>
+              <div class="booking-highlights" id="booking-highlights"></div>
+              <div class="contact-list">
+                <a id="booking-email" href=""></a>
+                <a id="booking-phone" href=""></a>
+                <span id="booking-status"></span>
+              </div>
+            </div>
+
+            <div class="booking-form booking-square-card">
+              <div class="booking-form-header">
+                <p class="booking-form-kicker" id="booking-action-kicker"></p>
+                <p class="booking-form-copy" id="booking-action-copy"></p>
+              </div>
+              <ul class="booking-checklist" id="booking-checklist"></ul>
+              <p class="form-note" id="booking-reference-note"></p>
+              <div class="booking-form-footer">
+                <a
+                  class="button button-primary"
+                  id="booking-action-button"
+                  href="https://app.squareup.com/appointments/book/td29m0027to36c/LSBDWR9P7H1WD/start"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >Start Appointment Request</a>
+                <p class="form-note" id="booking-action-note"></p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="deposit section section-divider-top" id="deposit">
+          <div class="deposit-panel">
+            <div class="deposit-copy">
+              <p class="eyebrow" id="deposit-eyebrow"></p>
+              <h2 id="deposit-title"></h2>
+              <p class="section-intro" id="deposit-intro"></p>
+            </div>
+            <div class="deposit-action">
+              <p class="deposit-note" id="deposit-note"></p>
+              <!-- TODO: After Stripe approval, replace this with the real Stripe Payment Link. -->
+              <span class="button button-disabled deposit-button" id="deposit-button" aria-disabled="true"></span>
+              <p class="form-note" id="deposit-payment-match-note"></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="payment section section-divider-top" id="payment">
+          <div class="payment-panel">
+            <div class="payment-copy">
+              <p class="eyebrow" id="payment-eyebrow"></p>
+              <h2 id="payment-title"></h2>
+              <p class="section-intro" id="payment-intro"></p>
+            </div>
+            <div class="payment-action">
+              <!-- TODO: After Stripe approval, replace this with the real Stripe Payment Link. -->
+              <span class="button button-disabled payment-button" id="payment-button" aria-disabled="true"></span>
+              <p class="form-note" id="payment-match-note"></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="payment-plan section section-divider-top" id="payment-plan">
+          <div class="payment-plan-panel">
+            <div class="payment-plan-copy">
+              <p class="eyebrow" id="payment-plan-eyebrow"></p>
+              <h2 id="payment-plan-title"></h2>
+              <p class="section-intro" id="payment-plan-intro"></p>
+            </div>
+            <div class="payment-plan-actions">
+              <p class="payment-plan-note" id="payment-plan-note"></p>
+              <div class="payment-plan-buttons" id="payment-plan-buttons"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="faq section section-divider-top" id="faq">
+          <div class="section-heading">
+            <p class="eyebrow" id="faq-eyebrow"></p>
+            <h2 id="faq-title"></h2>
+            <p class="section-intro" id="faq-intro"></p>
+          </div>
+          <div class="faq-list" id="faq-list"></div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div>
+          <p class="footer-brand" id="footer-brand"></p>
+          <p id="footer-description"></p>
+        </div>
+        <div class="footer-links" id="footer-links"></div>
+        <p class="footer-copy">© <span id="year"></span> <span id="footer-copyright-name"></span>. All rights reserved.</p>
+      </footer>
+    </div>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <button class="lightbox-close" type="button" aria-label="Close image viewer">Close</button>
+      <div class="lightbox-backdrop" data-lightbox-close></div>
+      <figure class="lightbox-figure">
+        <img class="lightbox-image" src="" alt="" />
+        <figcaption class="lightbox-caption"></figcaption>
+      </figure>
+    </div>
+
+    <script src="content.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
