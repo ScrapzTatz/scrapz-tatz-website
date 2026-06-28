@@ -254,10 +254,12 @@ window.siteContent = {
       "",
     paymentMatchNote:
       "Use the same name and appointment date/time from your approved appointment so we can match your payment.",
-    button: {
-      label: "Deposit Link Sent After Approval",
-      // TODO: Replace with Stripe Payment Link for approved deposits.
-    },
+      button: {
+        label: "Pay Approved Deposit",
+        href: "https://buy.stripe.com/fZu9AM1Bj8YL6BL5l20sU00",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
   },
   payment: {
     eyebrow: "Approved Payment",
@@ -266,10 +268,12 @@ window.siteContent = {
       "Approved payments are only made after SCRAPZ TATZ confirms the amount owed for your tattoo session, balance, or full payment.",
     paymentMatchNote:
       "Use the same name and appointment date/time from your approved appointment so we can match your payment.",
-    button: {
-      label: "Payment Link Sent After Approval",
-      // TODO: Replace with Stripe Payment Link for approved payments.
-    },
+      button: {
+        label: "Make Approved Payment",
+        href: "https://buy.stripe.com/aFa5kwfs9fn9d096p60sU01",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
   },
   paymentPlan: {
     eyebrow: "Payment Plans",
@@ -277,10 +281,10 @@ window.siteContent = {
     intro:
       "Payment plans may be available for larger approved projects. Ask about payment plan options during your appointment request or after SCRAPZ TATZ reviews your project.",
     note:
-      "Payment plans are reviewed case by case and are not automatically approved.",
+      "Payment plans are reviewed case by case. Mention payment plan interest in your appointment request.",
     buttons: [
       {
-        label: "Ask About Payment Plan",
+        label: "Request Payment Plan Review",
         href: "#booking",
         variant: "secondary",
       },
