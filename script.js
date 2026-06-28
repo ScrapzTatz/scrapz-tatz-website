@@ -175,14 +175,16 @@ const applySiteContent = () => {
 
   const brandLogo = byId("brand-logo");
   const heroLogo = byId("hero-logo");
+  const brandLogoPath = content.meta?.brandLogoPath || content.meta?.logoPath;
+  const heroLogoPath = content.meta?.heroLogoPath || content.meta?.logoPath;
 
-  if (brandLogo && content.meta?.logoPath) {
-    brandLogo.src = content.meta.logoPath;
+  if (brandLogo && brandLogoPath) {
+    brandLogo.src = brandLogoPath;
     brandLogo.alt = content.meta.logoAlt || "Site logo";
   }
 
-  if (heroLogo && content.meta?.logoPath) {
-    heroLogo.src = content.meta.logoPath;
+  if (heroLogo && heroLogoPath) {
+    heroLogo.src = heroLogoPath;
     heroLogo.alt = `${content.meta.logoAlt || "Site logo"} artwork`;
   }
 
@@ -283,9 +285,11 @@ const applySiteContent = () => {
 
 applySiteContent();
 
+const siteHeader = document.querySelector(".site-header");
 const navToggle = document.querySelector(".nav-toggle");
 const navMenu = document.querySelector(".nav-menu");
-const navLinks = document.querySelectorAll(".nav-menu a");
+const internalAnchorLinks = document.querySelectorAll('a[href^="#"]');
+const mobileNavMedia = window.matchMedia("(max-width: 760px)");
 const faqButtons = document.querySelectorAll(".faq-question");
 const yearTarget = document.getElementById("year");
 const galleryTriggers = document.querySelectorAll(".gallery-trigger");
@@ -294,26 +298,195 @@ const lightboxImage = document.querySelector(".lightbox-image");
 const lightboxCaption = document.querySelector(".lightbox-caption");
 const lightboxClose = document.querySelector(".lightbox-close");
 const lightboxBackdrop = document.querySelector("[data-lightbox-close]");
+let lastScrollY = window.scrollY;
+let isHeaderTicking = false;
+let isAnchorScrolling = false;
+let anchorScrollTimer = 0;
 
 if (yearTarget) {
   yearTarget.textContent = new Date().getFullYear();
 }
+
+const getHeaderHeight = () => siteHeader?.offsetHeight || 0;
+
+const setHeaderOffset = () => {
+  document.documentElement.style.setProperty("--header-offset", `${getHeaderHeight()}px`);
+};
+
+const showHeader = () => {
+  siteHeader?.classList.remove("nav-hidden");
+};
+
+const hideHeader = () => {
+  siteHeader?.classList.add("nav-hidden");
+};
+
+const isMobileViewport = () => mobileNavMedia.matches;
+
+const isMenuOpen = () => Boolean(navMenu?.classList.contains("is-open"));
+
+const closeNavMenu = () => {
+  if (!navMenu || !navToggle) {
+    return;
+  }
+
+  navMenu.classList.remove("is-open");
+  navToggle.setAttribute("aria-expanded", "false");
+  document.body.classList.remove("menu-open");
+};
+
+const scrollToHashTarget = (
+  hash,
+  { behavior = "smooth", updateHash = true, extraGap = 18 } = {}
+) => {
+  if (!hash || !hash.startsWith("#")) {
+    return false;
+  }
+
+  const target = byId(decodeURIComponent(hash.slice(1)));
+
+  if (!target) {
+    return false;
+  }
+
+  const targetTop = Math.max(
+    0,
+    target.getBoundingClientRect().top + window.scrollY - getHeaderHeight() - extraGap
+  );
+
+  isAnchorScrolling = true;
+  window.clearTimeout(anchorScrollTimer);
+  showHeader();
+  window.scrollTo({ top: targetTop, behavior });
+
+  if (updateHash && window.location.hash !== hash) {
+    window.history.pushState(null, "", hash);
+  }
+
+  anchorScrollTimer = window.setTimeout(() => {
+    isAnchorScrolling = false;
+    lastScrollY = window.scrollY;
+    setHeaderOffset();
+  }, 550);
+
+  return true;
+};
+
+const syncHeaderLayout = () => {
+  setHeaderOffset();
+
+  if (!isMobileViewport()) {
+    closeNavMenu();
+    showHeader();
+    lastScrollY = window.scrollY;
+    return;
+  }
+
+  if (window.scrollY <= getHeaderHeight() + 24 || isMenuOpen() || isAnchorScrolling) {
+    showHeader();
+  }
+
+  lastScrollY = window.scrollY;
+};
+
+const updateMobileHeaderState = () => {
+  const currentScrollY = window.scrollY;
+
+  if (!siteHeader) {
+    isHeaderTicking = false;
+    return;
+  }
+
+  if (!isMobileViewport()) {
+    showHeader();
+    lastScrollY = currentScrollY;
+    isHeaderTicking = false;
+    return;
+  }
+
+  if (isMenuOpen() || isAnchorScrolling || currentScrollY <= getHeaderHeight() + 24) {
+    showHeader();
+    lastScrollY = currentScrollY;
+    isHeaderTicking = false;
+    return;
+  }
+
+  const delta = currentScrollY - lastScrollY;
+
+  if (Math.abs(delta) >= 10) {
+    if (delta > 0) {
+      hideHeader();
+    } else {
+      showHeader();
+    }
+
+    lastScrollY = currentScrollY;
+  }
+
+  isHeaderTicking = false;
+};
 
 if (navToggle && navMenu) {
   navToggle.addEventListener("click", () => {
     const isOpen = navMenu.classList.toggle("is-open");
     navToggle.setAttribute("aria-expanded", String(isOpen));
     document.body.classList.toggle("menu-open", isOpen);
-  });
-
-  navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      navMenu.classList.remove("is-open");
-      navToggle.setAttribute("aria-expanded", "false");
-      document.body.classList.remove("menu-open");
-    });
+    showHeader();
+    setHeaderOffset();
   });
 }
+
+internalAnchorLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    const hash = link.getAttribute("href");
+
+    if (!hash || hash === "#") {
+      return;
+    }
+
+    const target = byId(decodeURIComponent(hash.slice(1)));
+
+    if (!target) {
+      return;
+    }
+
+    event.preventDefault();
+    closeNavMenu();
+    scrollToHashTarget(hash);
+  });
+});
+
+window.addEventListener(
+  "scroll",
+  () => {
+    if (!siteHeader || isHeaderTicking) {
+      return;
+    }
+
+    isHeaderTicking = true;
+    window.requestAnimationFrame(updateMobileHeaderState);
+  },
+  { passive: true }
+);
+
+window.addEventListener("resize", syncHeaderLayout);
+window.addEventListener("orientationchange", syncHeaderLayout);
+window.addEventListener("load", () => {
+  syncHeaderLayout();
+
+  if (window.location.hash) {
+    scrollToHashTarget(window.location.hash, { behavior: "auto", updateHash: false });
+  }
+});
+
+if (typeof mobileNavMedia.addEventListener === "function") {
+  mobileNavMedia.addEventListener("change", syncHeaderLayout);
+} else if (typeof mobileNavMedia.addListener === "function") {
+  mobileNavMedia.addListener(syncHeaderLayout);
+}
+
+setHeaderOffset();
+syncHeaderLayout();
 
 faqButtons.forEach((button) => {
   button.addEventListener("click", () => {

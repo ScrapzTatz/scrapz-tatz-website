@@ -3,7 +3,9 @@ window.siteContent = {
     title: "SCRAPZ TATZ | Custom Tattoo Studio",
     description:
       "SCRAPZ TATZ provides custom tattoo services with clean execution, required deposits, and a trusted appointment-only studio experience.",
-    logoPath: "assets/scrapz-tatz-logo.png",
+    logoPath: "assets/scrapz-tatz-logo.png?v=1",
+    brandLogoPath: "assets/scrapz-tatz-logo.png?v=1",
+    heroLogoPath: "assets/scrapz-tatz-logo.png?v=1",
     logoAlt: "SCRAPZ TATZ logo",
   },
   nav: {

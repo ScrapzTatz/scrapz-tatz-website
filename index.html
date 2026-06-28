@@ -14,7 +14,16 @@
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <script>
+      const stylesheet = document.createElement("link");
+      stylesheet.rel = "stylesheet";
+      stylesheet.href =
+        location.hostname === "127.0.0.1" || location.hostname === "localhost"
+          ? `style.css?dev=${Date.now()}`
+          : "style.css";
+      document.head.appendChild(stylesheet);
+    </script>
+    <noscript><link rel="stylesheet" href="style.css" /></noscript>
   </head>
   <body>
     <!-- Edit website text, links, and portfolio items in content.js -->
@@ -25,7 +34,7 @@
             <img
               id="brand-logo"
               class="brand-logo"
-              src="assets/scrapz-tatz-logo.png"
+              src="assets/scrapz-tatz-logo.png?v=1"
               alt="SCRAPZ TATZ logo"
             />
           </a>
@@ -70,7 +79,7 @@
                 <img
                   id="hero-logo"
                   class="hero-logo"
-                  src="assets/scrapz-tatz-logo.png"
+                  src="assets/scrapz-tatz-logo.png?v=1"
                   alt="SCRAPZ TATZ logo artwork"
                 />
               </div>
