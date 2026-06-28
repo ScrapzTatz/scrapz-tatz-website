@@ -289,7 +289,7 @@ const siteHeader = document.querySelector(".site-header");
 const navToggle = document.querySelector(".nav-toggle");
 const navMenu = document.querySelector(".nav-menu");
 const internalAnchorLinks = document.querySelectorAll('a[href^="#"]');
-const mobileNavMedia = window.matchMedia("(max-width: 760px)");
+const mobileNavMedia = window.matchMedia("(max-width: 900px)");
 const faqButtons = document.querySelectorAll(".faq-question");
 const yearTarget = document.getElementById("year");
 const galleryTriggers = document.querySelectorAll(".gallery-trigger");
@@ -391,6 +391,7 @@ const syncHeaderLayout = () => {
 
 const updateMobileHeaderState = () => {
   const currentScrollY = window.scrollY;
+  const scrollDelta = currentScrollY - lastScrollY;
 
   if (!siteHeader) {
     isHeaderTicking = false;
@@ -411,18 +412,13 @@ const updateMobileHeaderState = () => {
     return;
   }
 
-  const delta = currentScrollY - lastScrollY;
-
-  if (Math.abs(delta) >= 10) {
-    if (delta > 0) {
-      hideHeader();
-    } else {
-      showHeader();
-    }
-
-    lastScrollY = currentScrollY;
+  if (scrollDelta >= 8) {
+    hideHeader();
+  } else if (scrollDelta <= -8) {
+    showHeader();
   }
 
+  lastScrollY = currentScrollY;
   isHeaderTicking = false;
 };
 
